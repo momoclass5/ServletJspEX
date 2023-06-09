@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>쿠키를 활용한 팝업창 제어 ver2.0 </title>
 <style>
     div#popup {
         position: absolute; top:100px; left:50px; color:yellow;  
@@ -16,49 +17,37 @@
     }
 </style>
 <script>
+//페이지가 로드 되면 실행
 window.onload = function(){
-	if(typeof closeBtn != 'undefined'){
-		closeBtn.onclick = function(){
-			
-			if(document.querySelector("#inactiveToday").checked){
-				// 체크박스가 체크 되었으면 popFrm폼을 서브밋 처리 -> PopupCookie.jsp요청
-				popFrm.submit();
-				
-			} else {
-				popup.style.display = 'none';			
-			}
-			
-		}
+	// 버튼이 클릭되면 함수를 실행
+    closeBtn.onclick = function() {
+    	// 버튼이 클릭되면 팝업창 숨기기
+        popup.style.display='none';
+    	
+        var chkVal = document.querySelector("input[id=inactiveToday]:checked").value;
+        
+        if(chkVal == 1){
+        	// 쿠키 생성
+        	alert('쿠키생성');
+        }
 	}
-}
-
+}	
 </script>
-<title>쿠키를 이용한 팝업창 제어 ver 1.0 </title>
 </head>
 <body>
+<%
+CookieManager.readCookie(request, "PopupClose");
+%>
 
-	<h1>쿠키를 이용한 팝업창 제어</h1>
-	
-	<%
-	// 쿠키에 PopupClose값이 등록 되어 있지 않으면 팝업창을 보여줌
-	String cValue = CookieManager.readCookie(request, "PopupClose");
-
-	if(!cValue.equals("Y")){
-	
-	%>
-    <div id="popup" >
+	<div id="popup" >
         <h2 align="center">공지사항 팝업입니다.</h2>
         <div align="right">
-	        <form name="popFrm" action="PopupCookie.jsp">
+	        <form name="popFrm">
 	            <input type="checkbox" id="inactiveToday" value="1" /> 
 	            하루 동안 열지 않음
 	            <input type="button" value="닫기" id="closeBtn" /> 
 	        </form>
         </div>
     </div>
-    <%
-    }
-	%>
-    
 </body>
 </html>
