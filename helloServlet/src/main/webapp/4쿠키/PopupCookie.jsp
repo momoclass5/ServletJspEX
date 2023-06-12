@@ -13,7 +13,7 @@
 	<%
 		// 하루동안 팝업창이 열리지 않도록 쿠키 생성
 		CookieManager.makeCookie(response, "PopupClose", "Y", 60*60*24);
-		response.sendRedirect("PopupMain1.jsp");
+		//response.sendRedirect("PopupMain1.jsp");
 	%>
 </body>
 </html>

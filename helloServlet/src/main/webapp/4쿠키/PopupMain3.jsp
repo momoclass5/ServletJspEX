@@ -32,13 +32,11 @@ window.onload = function(){
         
         // 체크박스가 체크 된 상태라면
         if(chkVal != null && chkVal.value == 1){
-        	// 쿠키 생성 요청
-        	console.log("쿠키생성 요청");
-        	fetch('PopupCookie.jsp')
-        	.then((data)=>data.json)
-        	.then((json) => {
-        		console.log("PopupCookie.jsp 호출");
-        	});
+        	// javascript를 활용한 쿠키 생성
+        	const date = new Date();
+        	//12시간을 나타낸다
+        	date.setTime(date.getTime() + 12 * 60 * 60 * 1000);
+        	document.cookie = "PopupClose=off;expires="+date.toGMTString();
         }
 	}
 }	
