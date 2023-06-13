@@ -21,7 +21,7 @@
 		session.setAttribute("UserId", member.getId());
 		session.setAttribute("member", member);
 		
-		response.sendRedirect("LoginForm.jsp");
+		response.sendRedirect("Board.jsp");
 	} else {
 		// 로그인 실패 -> loginForm 페이지로 이동, 오류메세지 출력
 		request.setAttribute("LoginErrMsg"
@@ -35,6 +35,10 @@
 
 
 %>
+
+
+
+
 </body>
 </html>
 
