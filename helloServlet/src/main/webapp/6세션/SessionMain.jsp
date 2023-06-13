@@ -1,3 +1,5 @@
+<%@page import="java.util.Enumeration"%>
+<%@page import="javax.naming.Context"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -46,8 +48,8 @@
 -->
 
 <%
-
-	session.setMaxInactiveInterval(10);	
+	// 설정파일을 이용할 경우 주석 처리
+	// session.setMaxInactiveInterval(10);	
 
 	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss"); // 날자 표시 형식
 	
@@ -56,7 +58,20 @@
 	
 	long lastTime = session.getLastAccessedTime();	// 마지막 요청 시각
 	String lastTimeStr = sdf.format(new Date(lastTime));
-
+	
+	// 이건 세션의 컨텍스트를 얻기위한겁니다..(컨텍스터를 이용해서 세션의 ID를 알려고...)
+	HttpSessionContext context = session.getSessionContext();
+	  
+   // 위의 컨텍스트를 이용해서...
+   Enumeration ids = context.getIds();
+  
+   // 최신의 상태가 아닌 세션을 검색하기위해 세션ID를 살펴봄..
+   while (ids.hasMoreElements()) {
+      String id = (String)ids.nextElement();
+      out.println("Checking " + id + "...."); // 세션의 ID가 나오겠죠...
+      
+   }
+	
 %>
 
 <h2>Session 설정 확인</h2>
