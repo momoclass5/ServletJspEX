@@ -139,7 +139,83 @@ public class BoardDao {
 		return boardList;
 	}
 
+	/**
+	 * 게시글번호를 입력받아 게시글을 조회 합니다.
+	 * @param num
+	 * @return
+	 */
+	public Board selectOne(String num) {
+		Board board = null;
+		String sql = "select * from board where num = ? ";
+		
+		if(num == null || "".equals(num)) {
+			return null;
+		}
+		
+		try (Connection conn = DBConnPool.getConnection();
+				PreparedStatement psmt =  conn.prepareStatement(sql);){
+			psmt.setString(1, num);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			// 1건의 게시글을 조회 하여 board 객체에 담아줍니다.
+			if(rs.next()) {
+				board = new Board();
+				board.setNum(rs.getString("num"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setId(rs.getString("id"));
+				board.setPostdate(rs.getString("postdate"));
+				board.setVisitcount(rs.getString("visitcount"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return board;
+		
+	}
+	
+	/**
+	 * 게시물의 조회수를 1증가 시킵니다
+	 * @param num : 게시물번호
+	 * @return 업데이트된 건수
+	 */
+	public int updateVisitCount(String num) {
+		int res = 0;
+		String sql = "update board "
+					+ "set visitcount = visitcount+1 "
+					+ "where num= ? ";
+		
+		
+		try (Connection conn = DBConnPool.getConnection();
+				PreparedStatement stmt =  conn.prepareStatement(sql);){
+			stmt.setString(1, num);
+			res = stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	} 
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

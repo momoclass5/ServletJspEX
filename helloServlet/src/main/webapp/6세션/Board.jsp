@@ -86,7 +86,7 @@ if(boardList.isEmpty()){
 %>	
 	<tr>
 		<td><%=board.getNum() %></td>
-		<td><%=board.getTitle() %></td>
+		<td><a href="View.jsp?num=<%=board.getNum() %>"><%=board.getTitle() %></a></td>
 		<td><%=board.getId() %></td>
 		<td><%=board.getVisitcount() %></td>
 		<td><%=board.getPostdate() %></td>

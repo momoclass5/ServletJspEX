@@ -1,3 +1,4 @@
+<%@page import="common.JSFunction"%>
 <%@page import="dao.BoardDao"%>
 <%@page import="dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -36,21 +37,11 @@
 	
 	if(res > 0){
 		// 등록성공
-%>
-		<script>
-			alert("게시글이 등록 되었습니다.");
-			location.href="Board.jsp";
-		</script>
-<%
+		JSFunction.alertLocation("게시글이 등록 되었습니다.(공통호출)", "Board.jsp", out);
 		
 	} else {
 		// 등록실패
-%>
-		<script>
-			alert("등록중 오류가 발생 하였습니다.");
-			history.go(-1);
-		</script>
-<%
+		JSFunction.alertBack("등록중 오류가 발생 하였습니다.(공통호출)", out);
 	}
 %>
 
