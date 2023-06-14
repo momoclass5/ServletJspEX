@@ -14,10 +14,18 @@
 
 String searchField = request.getParameter("searchField");
 String searchWord = request.getParameter("searchWord");
+// 검색어가 null인 경우 빈문자열로 치환
+searchWord = searchWord == null ? "" : searchWord;
+/*
+if(searchWord == null){
+	searchWord = "";
+}
+*/
+
 
 // 검색어가 null이 아니면 검색 기능을 추가!!!!
-out.print("검색어 : " + searchWord + "<br>");
-out.print("검색필드 : " + searchField);
+//out.print("검색어 : " + searchWord + "<br>");
+//out.print("검색필드 : " + searchField);
 
 
 
@@ -89,13 +97,21 @@ if(boardList.isEmpty()){
 } 
 %>
 </table>
+<%
+	if(session.getAttribute("UserId") != null){
+%>
 <table border="1" width="90%">
 	<tr>
 		<td align="right">
-			<input type="submit" value="글쓰기">
+		
+
+		
+			<input type="button" value="글쓰기" onclick="location.href='Write.jsp'">
+			
 		</td>
 	</tr>
 </table>
+<%	} %>
 
 
 </body>

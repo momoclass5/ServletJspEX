@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import common.DBConnPool;
 import dto.Board;
 
@@ -19,6 +21,38 @@ public class BoardDao {
 
 	public BoardDao() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * 게시글을 등록 합니다.
+	 * @param board
+	 * @return
+	 */
+	public int insert(Board board) {
+		int res = 0;
+		
+		String sql = 
+				  "insert into board  "
+				+ "		(num, title, content, id, postdate, visitcount) "
+				+ "values (seq_board_num.nextval, "
+				+ "			?, ?, ?, sysdate, 0)";
+		
+		try (Connection conn = DBConnPool.getConnection();
+				PreparedStatement psmt =  conn.prepareStatement(sql);){
+			
+			psmt.setString(1, board.getTitle());
+			psmt.setString(2, board.getContent());
+			psmt.setString(3, board.getId());
+			
+			// insert, update, delete 실행후 몇건이 처리 되었는지 반환
+			res = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 	
 	/**
@@ -35,6 +69,7 @@ public class BoardDao {
 		
 		sql += "order by num desc";
 		
+		//System.out.println(sql);
 		
 		try (Connection conn = DBConnPool.getConnection();
 				PreparedStatement psmt = conn.prepareStatement(sql);){
