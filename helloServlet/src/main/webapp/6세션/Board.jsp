@@ -11,17 +11,24 @@
 </head>
 <body>
 <%
-	BoardDao dao = new BoardDao();
-	List<Board> boardList = dao.getList();
 
-	int totalCnt = dao.getTotalCnt();
+String searchField = request.getParameter("searchField");
+String searchWord = request.getParameter("searchWord");
+
+// 검색어가 null이 아니면 검색 기능을 추가!!!!
+out.print("검색어 : " + searchWord + "<br>");
+out.print("검색필드 : " + searchField);
+
+
+
+	BoardDao dao = new BoardDao();
+	List<Board> boardList = dao.getList(searchField, searchWord);
+
+	int totalCnt = dao.getTotalCnt(searchField, searchWord);
 	
-	String searchField = request.getParameter("searchField");
-	String searchWord = request.getParameter("searchWord");
 	
-	// 검색어가 null이 아니면 검색 기능을 추가!!!!
-	out.print(searchWord);
-	out.print(searchField);
+	
+
 	
 %>
 

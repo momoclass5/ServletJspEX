@@ -10,6 +10,11 @@ import java.util.List;
 import common.DBConnPool;
 import dto.Board;
 
+/**
+ * 
+ * @author user
+ * 
+ */
 public class BoardDao {
 
 	public BoardDao() {
@@ -20,11 +25,15 @@ public class BoardDao {
 	 * 게시물의 총 갯수를 반환 합니다
 	 * @return 게시물의 총 갯수
 	 */
-	public int getTotalCnt() {
+	public int getTotalCnt(String searchField, String searchWord) {
 		int totalCnt = 0;
 		String sql = "select count(*) "
-				+ "from board "
-				+ "order by num desc";
+					+ "from board ";
+		if(searchWord != null && !"".equals(searchWord)) {
+			sql += "where "+ searchField +" like '%"+ searchWord +"%'";
+		}	
+		
+		sql += "order by num desc";
 		
 		
 		try (Connection conn = DBConnPool.getConnection();
@@ -43,14 +52,30 @@ public class BoardDao {
 	}
 	
 	
+
 	/**
-	 * 게시글을 조회 합니다.
-	 * @return List<Board>
+	 * 
+	 * 게시글 목록을 조회 합니다.
+	 * 
+	 * @param searchField : 검색조건
+	 * @param searchWord : 검색어
+	 * @return List<Board> : 게시글 목록
 	 */
-	public List<Board> getList() {
+	public List<Board> getList(String searchField, String searchWord) {
 		List<Board> boardList = new ArrayList<>();
 		
-		String sql = "select * from board order by num desc";
+		String sql = "select * "
+					+ "from board ";
+				
+		// 검색어가 입력 되었으면 검색 조건을 추가 합니다.
+		if(searchWord != null 
+				&& !"".equals(searchWord)){		
+			
+			sql 	+=	"where " + searchField 
+							+" like '%" + searchWord + "%'";
+		}
+		
+		sql		+= 	"order by num desc";
 
 		// 검색조건 추가
 		try (Connection conn = DBConnPool.getConnection();
