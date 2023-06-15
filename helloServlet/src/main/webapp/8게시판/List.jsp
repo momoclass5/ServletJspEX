@@ -73,7 +73,7 @@
         <tr align="center">
             <td><%=board.getNum() %></td>  <!--게시물 번호-->
             <td align="left">  <!--제목(+ 하이퍼링크)-->
-                <%=board.getTitle() %></a> 
+                <a href="View.jsp?num=<%=board.getNum()%>"><%=board.getTitle() %></a> 
             </td>
             <td align="center"><%=board.getId() %></td>          <!--작성자 아이디-->
             <td align="center"><%=board.getVisitcount() %></td>  <!--조회수-->
@@ -92,7 +92,8 @@
     %>
     <table border="1" width="90%">
         <tr align="right">
-            <td><button type="button">글쓰기</button></td>
+            <td><button type="button" 
+            		onclick="location.href='Write.jsp'">글쓰기</button></td>
         </tr>
     </table>
     <%} %>

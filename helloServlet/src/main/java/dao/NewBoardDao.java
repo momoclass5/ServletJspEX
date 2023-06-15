@@ -33,6 +33,8 @@ public class NewBoardDao {
 						+" like '%"+criteria.getSearchWord()+"%'";
 		}
 		
+		sql += " order by num desc";
+		
 		try (Connection conn = DBConnPool.getConnection();
 				PreparedStatement psmt = conn.prepareStatement(sql);){
 			
@@ -112,4 +114,93 @@ public class NewBoardDao {
 		
 		return list;
 	}
+	
+	public int insert(Board board) {
+		int res = 0;
+		String sql = "insert into board "
+				+ "values (seq_board_num.nextval, ?, ?, ?, sysdate, 0)";
+		
+		try (Connection conn = DBConnPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);){
+			
+			psmt.setString(1, board.getTitle());
+			psmt.setString(2, board.getContent());
+			psmt.setString(3, board.getId());
+			
+			res = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public Board selectOne(String num) {
+		String sql = "select * from board where num=?";
+		Board board = null;
+		
+		System.out.println("num : "+num);
+		try (Connection conn = DBConnPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);){
+			psmt.setString(1, num);
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new Board();
+				board.setContent(rs.getString("content"));
+				board.setId(rs.getString("id"));
+				board.setNum(rs.getString("num"));
+				board.setPostdate(rs.getString("postdate"));
+				board.setTitle(rs.getString("title"));
+				board.setVisitcount(rs.getString("visitcount"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return board;
+	}
+	
+	public void updateVisitCount(String num) {
+		String sql = "update board set visitcount=visitcount+1 where num=?";
+		
+		
+		try (Connection conn = DBConnPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);){
+			
+			psmt.setString(1, num);
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
