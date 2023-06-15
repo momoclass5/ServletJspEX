@@ -1,3 +1,8 @@
+
+<%@page import="dto.Criteria"%>
+<%@page import="dto.Board"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.NewBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,7 +11,26 @@
 <meta charset="UTF-8">
 <title>회원제 게시판</title>
 </head>
+
+<%
+	// 검색조건
+	String searchField = request.getParameter("searchField");
+	String searchWord = request.getParameter("searchWord");
+	
+	// 페이지 번호
+	int pageNo = request.getParameter("pageNo")==null
+			? 1 : Integer.parseInt(request.getParameter("pageNo"));
+
+	Criteria criteria = new Criteria(searchField, searchWord, pageNo);
+	
+	NewBoardDao dao = new NewBoardDao();
+	List<Board> list = dao.getList(criteria);
+	//List<Board> list = dao.getListPage(criteria);
+%>
+
 <body>
+<%@include file="../6세션/Link.jsp" %>
+	<h1>new</h1>
     <h2>목록 보기(List)</h2>
     <!-- 검색폼 --> 
     <form method="get">  
@@ -34,23 +58,57 @@
             <th width="15%">작성일</th>
         </tr>
         <!-- 목록의 내용 --> 
-
+	<%
+		if(list.isEmpty()){
+	%>
+		<tr>
+			<td colspan="5" align="center">게시물이 없습니다.</td>
+		</tr>
+	
+	<%
+		} else {
+			// 리스트목록을 돌면서 board객체를 꺼내옵니다
+			for(Board board : list){
+	%>
         <tr align="center">
-            <td>1</td>  <!--게시물 번호-->
+            <td><%=board.getNum() %></td>  <!--게시물 번호-->
             <td align="left">  <!--제목(+ 하이퍼링크)-->
-                제목</a> 
+                <%=board.getTitle() %></a> 
             </td>
-            <td align="center">아이디</td>          <!--작성자 아이디-->
-            <td align="center">조회수</td>  <!--조회수-->
-            <td align="center">작성일</td>    <!--작성일-->
+            <td align="center"><%=board.getId() %></td>          <!--작성자 아이디-->
+            <td align="center"><%=board.getVisitcount() %></td>  <!--조회수-->
+            <td align="center"><%=board.getPostdate() %></td>    <!--작성일-->
         </tr>
 
+	<%
+		} 
+	}
+	%>
     </table>
     <!--목록 하단의 [글쓰기] 버튼-->
+    <% 
+    if(session.getAttribute("UserId") != null 
+    		&& !"".equals(session.getAttribute("UserId"))){
+    %>
     <table border="1" width="90%">
         <tr align="right">
             <td><button type="button">글쓰기</button></td>
         </tr>
     </table>
+    <%} %>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
