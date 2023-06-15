@@ -31,7 +31,7 @@
 </script>
 </head>
 <body>
-
+<%@include file="Link.jsp" %>
 <h2>상세보기</h2>
 
 	<table border="1" width="90%">
@@ -71,7 +71,7 @@
     <button type="button" 
     	onclick="location.href='Edit.jsp?num=<%=board.getNum()%>'">수정하기</button>
     <button type="button" 
-    	onclick="">삭제하기</button>
+    	onclick="deletePost()">삭제하기</button>
                 
                 <%} %>
                 
