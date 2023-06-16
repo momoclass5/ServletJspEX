@@ -182,6 +182,31 @@ public class NewBoardDao {
 		
 		
 	}
+	
+	public int getTotlaCnt(Criteria criteria) {
+		int res = 0;
+		String sql = "select count(*) from board ";
+		if(criteria.getSearchWord() != null 
+				&& !"".equals(criteria.getSearchWord())) {
+			sql += "where "+criteria.getSearchField()
+					+" = '%"+criteria.getSearchWord()+"%'";
+		}
+		
+		try (Connection conn = DBConnPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);){
+			
+			ResultSet rs = psmt.executeQuery();
+			if(rs.next()) {
+				res = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 }
 
 

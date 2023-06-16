@@ -1,4 +1,5 @@
 
+<%@page import="dto.PageDto"%>
 <%@page import="dto.Criteria"%>
 <%@page import="dto.Board"%>
 <%@page import="java.util.List"%>
@@ -24,8 +25,13 @@
 	Criteria criteria = new Criteria(searchField, searchWord, pageNo);
 	
 	NewBoardDao dao = new NewBoardDao();
-	List<Board> list = dao.getList(criteria);
-	//List<Board> list = dao.getListPage(criteria);
+	//List<Board> list = dao.getList(criteria);
+	
+	List<Board> list = dao.getListPage(criteria);
+	int totalCnt = dao.getTotlaCnt(criteria);
+	
+	out.print("총건수 : " + totalCnt);
+	
 %>
 
 <body>
@@ -33,7 +39,8 @@
 	<h1>new</h1>
     <h2>목록 보기(List)</h2>
     <!-- 검색폼 --> 
-    <form method="get">  
+    <form method="get" name="searchForm">
+    <input type="text" name="pageNo" value="<%=criteria.getPageNo()%>">  
     <table border="1" width="90%">
     <tr>
         <td align="center">
@@ -97,6 +104,25 @@
         </tr>
     </table>
     <%} %>
+    <!-- 
+    페이지블럭 생성 시작
+	    - 총 건수 조회
+	    - 쿼리수정
+	    - form의 이름을 searchForm으로 지정
+	    - pageNo 필드를 생성
+    -->
+	<%
+		PageDto pageDto = new PageDto(totalCnt, criteria);
+	%>
+	<table border="1" width="90%">
+		<tr>
+			<td align="center">
+				<%@include file="../9페이지/PageNavi.jsp" %>
+			</td>
+		</tr>
+	</table>
+	<!-- 페이지블럭 생성 끝-->
+	
 </body>
 </html>
 
