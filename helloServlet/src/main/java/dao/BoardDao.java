@@ -7,10 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import common.DBConnPool;
 import dto.Board;
+import dto.Criteria;
 
 /**
  * 
@@ -59,12 +58,12 @@ public class BoardDao {
 	 * 게시물의 총 갯수를 반환 합니다
 	 * @return 게시물의 총 갯수
 	 */
-	public int getTotalCnt(String searchField, String searchWord) {
+	public int getTotalCnt(Criteria criteria) {
 		int totalCnt = 0;
 		String sql = "select count(*) "
 					+ "from board ";
-		if(searchWord != null && !"".equals(searchWord)) {
-			sql += "where "+ searchField +" like '%"+ searchWord +"%'";
+		if(criteria.getSearchWord() != null && !"".equals(criteria.getSearchWord())) {
+			sql += "where "+ criteria.getSearchField() +" like '%"+ criteria.getSearchWord() +"%'";
 		}	
 		
 		sql += "order by num desc";
@@ -147,26 +146,32 @@ public class BoardDao {
 	 * @param searchWord : 검색어
 	 * @return List<Board> : 게시글 목록
 	 */
-	public List<Board> getListPage(String page, String searchField, String searchWord) {
+	public List<Board> getListPage(Criteria criteria) {
 		List<Board> boardList = new ArrayList<>();
 		
-		String sql = "select * from ( "
-				+ "    select rownum rn, t.* "
-				+ "    from ("
-				+ "			select * "
-				+ "			from board ";
+		String sql = ""
+				+ "select * from ("
+				+ "    select rownum rn, t.*  from ("
+				
+				+ "select *"
+					+ "from board ";
 				
 		// 검색어가 입력 되었으면 검색 조건을 추가 합니다.
-		if(searchWord != null 
-				&& !"".equals(searchWord)){		
+		if(criteria.getSearchWord() != null 
+				&& !"".equals(criteria.getSearchWord())){		
 			
-			sql 	+=	"where " + searchField 
-							+" like '%" + searchWord + "%'";
+			sql 	+=	"where " + criteria.getSearchField() 
+							+" like '%" + criteria.getSearchWord() + "%'";
 		}
 		
-		sql		+= 	"order by num desc ) t "
-				+ ")"
-				+ "where rn between 11 and 20";
+		sql		+= 	"order by num desc"
+				+ ")t )"
+				+ "where rn between "+ criteria.getStartNo()
+				+ " and "+ criteria.getEndNo();
+		
+		
+		
+		
 
 		// 검색조건 추가
 		try (Connection conn = DBConnPool.getConnection();
