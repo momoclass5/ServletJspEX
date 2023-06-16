@@ -80,7 +80,7 @@
         <tr align="center">
             <td><%=board.getNum() %></td>  <!--게시물 번호-->
             <td align="left">  <!--제목(+ 하이퍼링크)-->
-                <a href="View.jsp?num=<%=board.getNum()%>"><%=board.getTitle() %></a> 
+                <a href="View.jsp?num=<%=board.getNum()%>&pageNo=<%=criteria.getPageNo()%>"><%=board.getTitle() %></a> 
             </td>
             <td align="center"><%=board.getId() %></td>          <!--작성자 아이디-->
             <td align="center"><%=board.getVisitcount() %></td>  <!--조회수-->
