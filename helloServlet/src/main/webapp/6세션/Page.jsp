@@ -11,12 +11,18 @@
 <body>
 <script>
 	function go(page){
-		document.searchForm.pageNo.value=page;
-		document.searchForm.submit();
+		location.href="PageNavi.jsp?pageNo="+page;
 	}
 </script>
 
 <%
+	
+	int pageNo = request.getParameter("pageNo")==null
+			?1:Integer.parseInt(request.getParameter("pageNo"));
+
+	Criteria criteria = new Criteria(pageNo);
+	int total = 300;
+	PageDto pageDto = new PageDto(total, criteria);
 
 	if(pageDto.isPrev()){
 		// 1페이지 호출

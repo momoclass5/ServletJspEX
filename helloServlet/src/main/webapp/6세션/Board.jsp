@@ -43,7 +43,8 @@
 총건수 : <%=totalCnt %>
 
 <!-- 검색폼 -->
-<form>
+<form name='searchForm'>
+<input type='hidden' name='pageNo' value='<%=criteria.getPageNo()%>'>
 <table border="1" width="90%">
 	<tr>
 		<td align="center">
@@ -52,7 +53,7 @@
 				<option value="title">제목</option>
 				<option value="content">내용</option>
 			</select>
-			<input type="text" name="searchWord" value="<%=searchWord%>">
+			<input type="text" name="searchWord" value="<%=criteria.getSearchWord()%>">
 			<input type="submit" value="검색하기">
 		</td>
 	</tr>
@@ -110,7 +111,18 @@ if(boardList.isEmpty()){
 </table>
 <%	} %>
 
-
+<!-- 페이지블럭 생성 시작-->
+<%
+	PageDto pageDto = new PageDto(totalCnt, criteria);
+%>
+<table border="1" width="90%">
+	<tr>
+		<td align="center">
+			<%@include file="PageNavi.jsp" %>
+		</td>
+	</tr>
+</table>
+<!-- 페이지블럭 생성 끝-->
 </body>
 </html>
 

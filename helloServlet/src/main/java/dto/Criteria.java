@@ -2,8 +2,8 @@ package dto;
 
 public class Criteria {
 
-	private String searchField; // 검색조건
-	private String searchWord; // 검색어
+	private String searchField=""; // 검색조건
+	private String searchWord=""; // 검색어
 	
 	int pageNo = 1;	// 요청한 페이지 번호
 	int amount = 10; // 한페이지당 보여질 게시물 수
