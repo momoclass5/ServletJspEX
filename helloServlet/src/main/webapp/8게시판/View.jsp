@@ -24,6 +24,7 @@
 	dao.updateVisitCount(num);
 	// 게시글 조회
 	Board board = dao.selectOne(num);
+	request.setAttribute("board", board);
 %>
 <%@ include file="../6세션/Link.jsp" %>
 <h2>회원제 게시판 - 상세 보기(View)</h2>
@@ -31,7 +32,7 @@
     <table border="1" width="90%">
         <tr>
             <td>번호</td>
-            <td><%=board.getNum() %></td>
+            <td><%=board.getNum() %>${board.num }</td>
             <td>작성자</td>
             <td><%=board.getId() %></td>
         </tr>
