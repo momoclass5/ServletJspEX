@@ -11,7 +11,7 @@
 <body>
 <script>
 	function go(page){
-		location.href="PageNavi.jsp?pageNo="+page;
+		location.href="Page.jsp?pageNo="+page;
 	}
 </script>
 
