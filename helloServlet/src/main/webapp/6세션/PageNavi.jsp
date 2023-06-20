@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page import="dto.Criteria"%>
 <%@page import="dto.PageDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,7 +18,15 @@
 	}
 </script>
 
+<!-- 영역에 저장 -->
+<c:set var="pageDto" value="<%=pageDto %>"></c:set>
+<c:if test="${pageDto.prev}">
+
+
+</c:if>
+
 <%
+
 
 	if(pageDto.isPrev()){
 		// 1페이지 호출
