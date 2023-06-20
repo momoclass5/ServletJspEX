@@ -26,8 +26,8 @@ public class PageDto {
 		// 페이지 블럭의 끝번호 구하기
 		// 7페이지 요청 : 올림(7/10.0) * 10
 		// 11페이지 요청 : 올림(11/10.0) * 10
-		endNo = (int)(Math.ceil(criteria.pageNo/10.0) * 10);
-		startNo = endNo - (10-1);
+		endNo = (int)(Math.ceil(criteria.pageNo/5.0) * 5);
+		startNo = endNo - (5-1);
 		
 		// 끝 페이지 번호
 		// 55/10 = 5  ->  더블타입으로 계산후 올림처림
