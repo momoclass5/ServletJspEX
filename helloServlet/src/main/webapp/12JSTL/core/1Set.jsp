@@ -1,3 +1,6 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="dto.Member"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -103,7 +106,39 @@
         <li>변경후 아이디 : ${ requestScope.personVal2.id }</li>
     </ul>
     
+    <h4>List 컬렉션 이용하기</h4>
+    <%
+    ArrayList<Member> list = new ArrayList<Member>();
+    list.add(new Member("hani","","하니",""));
+    list.add(new Member("nami","","나미",""));
+    %>
+    <c:set var="pList" value="<%=list %>" scope="request"/>
+    <ul>
+        <li>이름 : ${ pList[0].name }</li>
+        <li>아이디 : ${ requestScope.pList[0].id }</li>
+    </ul>
+    <ul>
+        <li>이름 : ${ pList[1].name }</li>
+        <li>아이디 : ${ requestScope.pList[1].id }</li>
+    </ul>    
     
+    <%
+    Map<String, Member> map = new HashMap<String, Member>();
+    map.put("pArgs1", new Member("1","","일번",""));
+    map.put("pArgs2", new Member("2","","이번",""));
+    %>
+    
+    <h4>Map 컬렉션 이용하기</h4>
+    <c:set var="map" value="<%=map %>" scope="request"/>
+    
+    <ul>
+        <li>이름 : ${ map.pArgs1.name }</li>
+        <li>아이디 : ${ requestScope.map.pArgs1.id }</li>
+    </ul>
+    <ul>
+        <li>이름 : ${ map.pArgs2.name }</li>
+        <li>아이디 : ${ requestScope.map.pArgs2.id }</li>
+    </ul>    
 </body>
 </html>
 

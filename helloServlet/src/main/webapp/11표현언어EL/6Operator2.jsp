@@ -28,7 +28,7 @@
 
 <h2>empty 연산자</h2>
 	<!-- 주로 리스트 출력시 리스트가 비었는지 확인하는 용도로 사용 -->
-	empty nullStr 	: ${empty nullStr }		<br>
+	empty nullStr 	: ${ empty nullStr }		<br>
 	empty emptyStr 	: ${ empty emptyStr } 	<br>
 	empty lengthZero: ${ empty lengthZero }	<br>
 	empty sizeZero 	: ${ empty sizeZero }	<br>
