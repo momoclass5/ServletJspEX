@@ -57,7 +57,9 @@
 	    response.setHeader("Content-Length", "" + file.length() );
 	
 	    // 출력스트림 초기화
+	    // 기존 out객체를 비우고 새로 쓸 준비를 함
 	    out.clear();
+	    out = pageContext.pushBody();	
 	    
 	    // response 내장 객체로 부터 새로운 출력 스트림을 생성
 	    OutputStream outStream = response.getOutputStream();
