@@ -75,7 +75,7 @@ function validateForm(form){
 			<input type="checkbox" name="category" value="음원">음원
 		</p>
 		<p>
-			첨부파일 : <input type="file" name="attachedFile">
+			첨부파일 : <input type="file" name="attachedFile" >
 		</p>
 		
 		<input type="submit" value="전송하기">

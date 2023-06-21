@@ -19,7 +19,7 @@
 	String saveDirectory = "C:/upload";
 
 	// webapp폴더 하위에 디렉토리를 생성
-	saveDirectory = "D:\\apache-tomcat-9.0.65\\ServletJspEX\\helloServlet\\src\\main\\webapp\\upload";
+	//saveDirectory = "D:\\apache-tomcat-9.0.65\\ServletJspEX\\helloServlet\\src\\main\\webapp\\upload";
 	
 	// 파일의 최대 크기(1MB)
 	int maxPostSize = 1024 * 1000;
