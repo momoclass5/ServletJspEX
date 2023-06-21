@@ -18,9 +18,6 @@
 	// 저장할 디렉터리의 실제 경로
 	String saveDirectory = "C:/upload";
 
-	// webapp폴더 하위에 디렉토리를 생성
-	//saveDirectory = "D:\\apache-tomcat-9.0.65\\ServletJspEX\\helloServlet\\src\\main\\webapp\\upload";
-	
 	// 파일의 최대 크기(1MB)
 	int maxPostSize = 1024 * 1000;
 	
@@ -87,9 +84,12 @@
 	    if(res>0){
 	    	out.print("등록 되었습니다.");
 	    	// 리스트 페이지로 이동
+	    	JSFunction.alertLocation("등록되었습니다.", "FileList.jsp", out);
 	    } else {
 	    	out.print("DB등록에 실패 하였습니다.");
 	    	// 이전페이지로 이동
+	    	JSFunction.alertBack("파일 등록에 실패 하였습니다." 
+	    							+"관리자에게 문의해주세요.", out);
 	    }
 	    
 	    
@@ -98,7 +98,11 @@
 		out.print(e);
 	    request.setAttribute("errorMessage", "파일 업로드 오류");
 	    
-	    // 이전페이지로 이동
+	 	// 이전페이지로 이동
+	    JSFunction.alertBack("파일 업로드 오류발생" 
+								+"관리자에게 문의해주세요.", out);
+	    
+	    
 	}
 	
 %>

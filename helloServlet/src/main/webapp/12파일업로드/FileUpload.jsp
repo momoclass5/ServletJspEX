@@ -56,6 +56,7 @@ function validateForm(form){
 	<!-- 
 	유효성검사, validateion체크
 	사용자입력체크 로직추가 -->
+	${errorMessage }
 	<form action="UploadProcess.jsp" 
 			method="post" 
 			enctype="multipart/form-data"

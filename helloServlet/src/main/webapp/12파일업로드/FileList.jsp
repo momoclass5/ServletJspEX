@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="fileupload.FileDto"%>
 <%@page import="java.util.List"%>
 <%@page import="fileupload.FileDao"%>
@@ -42,8 +43,7 @@
 				<td>${fileDto.sfile }</td>			
 				<td>${fileDto.postdate }</td>		
 				<td>
-					<a href="${pageContext.request.contextPath }/upload/${fileDto.sfile}"
-					 		download="다운로드파일명">다운로드</a>
+					<a href="Download.jsp?oName=${fileDto.ofile }&sName=${fileDto.sfile }">다운로드</a>
 				</td>	
 			</tr>
 		</c:forEach>
