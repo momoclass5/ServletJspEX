@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * @WebServlet 
  * 
- * - 사용자의 요청 URL과 매핑
+ * - 사용자의 요청 URI과 매핑
  * 
  */
 @WebServlet("/HelloJSP")
