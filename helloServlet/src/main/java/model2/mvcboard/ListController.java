@@ -1,6 +1,7 @@
 package model2.mvcboard;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,14 @@ public class ListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// 리스트 조회
+		MVCBoardDao dao = new MVCBoardDao();
+		List<MVCBoardDto> list = dao.getList();
+		
+		System.out.println("list : " + list.size());
+		
 		// request영역에 저장
+		req.setAttribute("list", list);
+		
 		// 화면 페이지 전환
 		req.getRequestDispatcher("/14MVCBoard/List.jsp").forward(req, resp);
 	
