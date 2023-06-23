@@ -180,6 +180,30 @@ public class MVCBoardDao {
 		
 		return dto;
 	}
+
+	public boolean comfirmPassword(String pass, String idx) {
+		boolean res = false;
+		String sql = "select * from mvcboard where idx = ? and pass = ? ";
+		
+		try (Connection conn = DBConnPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);){
+		
+			psmt.setString(1, idx);
+			psmt.setString(2, pass);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			res = rs.next();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return res;
+	}
 }
 
 

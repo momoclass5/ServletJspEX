@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ViewController
  */
-@WebServlet("/mvcboard/view.do")
+@WebServlet("/mvcboard/View.do")
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

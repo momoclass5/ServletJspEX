@@ -59,7 +59,7 @@
 					<tr>	
 						<td>${row.idx }</td>
 						<td>
-						<a href="../mvcboard/view.do?idx=${row.idx }">
+						<a href="../mvcboard/View.do?idx=${row.idx }">
 							${row.title }
 						</a></td>
 						<td>${row.name }</td>

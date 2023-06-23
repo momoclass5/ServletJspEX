@@ -19,8 +19,8 @@
 <body>    
 <h2>파일 첨부형 게시판 - 비밀번호 검증(Pass)</h2>
 <form name="writeFrm" method="post" action="../mvcboard/pass.do" onsubmit="return validateForm(this);">
-<input type="hidden" name="idx" value="${ param.idx }" />
-<input type="hidden" name="mode" value="${ param.mode }" />
+<input type="text" name="idx" value="${ param.idx }" />
+<input type="text" name="mode" value="${ param.mode }" />
 <table border="1" width="90%">
     <tr>
         <td>비밀번호</td>
