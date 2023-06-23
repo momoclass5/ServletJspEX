@@ -67,6 +67,7 @@
     </tr>
     <tr>
         <td colspan="2" align="center">
+        	<!-- 글쓰기 버튼 클릭 하면 글등록 -->
             <button type="submit">작성 완료</button>
             <button type="reset">RESET</button>
             <button type="button" onclick="location.href='../mvcboard/list.do';">

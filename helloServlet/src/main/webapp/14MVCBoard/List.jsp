@@ -18,7 +18,7 @@
     <table border="1" width="90%">
     
     <!-- 페이지 번호 -->
-    <input type="text" name="pageNo">
+    <input type="hidden" name="pageNo">
     
     <tr>
         <td align="center">
@@ -70,7 +70,25 @@
 	
 	</table>
 	
-	<%@include file="../9페이지/PageNavi.jsp" %>
+	<!-- 글쓰기 버튼 추가
+		글쓰기 버튼 클릭시 글쓰기 페이지로 이동  -->
+	<table>
+		<tr>
+			<td align="right">
+				
+				<button onclick="location.href='../mvcboard/write.do'"></button>
+			</td>
+		</tr>
+	</table>
+	
+	
+	<table border="1" width="90%">
+		<tr>
+			<td align="center">
+				<%@include file="../9페이지/PageNavi.jsp" %>
+			</td>
+		</tr>
+	</table>
 	
 	
 </body>
