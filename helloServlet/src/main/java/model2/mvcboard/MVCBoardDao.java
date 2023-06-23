@@ -149,6 +149,37 @@ public class MVCBoardDao {
 		
 		return totalCnt;
 	}
+
+	public MVCBoardDto selectOne(String idx) {
+		MVCBoardDto dto = new MVCBoardDto();
+		String sql = "select * from mvcboard where idx = ? ";
+		
+		try (Connection conn = DBConnPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);){
+			psmt.setString(1, idx);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setIdx(rs.getString(1));
+                dto.setName(rs.getString(2));
+                dto.setTitle(rs.getString(3));
+                dto.setContent(rs.getString(4));
+                dto.setPostdate(rs.getString(5));
+                dto.setOfile(rs.getString(6));
+                dto.setSfile(rs.getString(7));
+                dto.setDowncount(rs.getInt(8));
+                dto.setPass(rs.getString(9));
+                dto.setVisitcount(rs.getInt(10));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("게시물 상세보기 조회중 오류가 발생 하였습니다.");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 }
 
 

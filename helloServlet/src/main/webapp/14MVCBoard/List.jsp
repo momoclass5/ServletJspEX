@@ -58,7 +58,10 @@
 				<c:forEach items="${list }" var="row" varStatus="loop">
 					<tr>	
 						<td>${row.idx }</td>
-						<td>${row.title }</td>
+						<td>
+						<a href="../mvcboard/view.do?idx=${row.idx }">
+							${row.title }
+						</a></td>
 						<td>${row.name }</td>
 						<td>${row.visitcount }</td>
 						<td>${row.postdate }</td>
