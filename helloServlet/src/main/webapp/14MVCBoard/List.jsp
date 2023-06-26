@@ -65,7 +65,15 @@
 						<td>${row.name }</td>
 						<td>${row.visitcount }</td>
 						<td>${row.postdate }</td>
-						<td>첨부파일</td>
+						<td>
+							<!-- 첨부파일이 있으면 첨부파일 다운로드 -->
+							<c:if test="${not empty row.ofile }">
+								<a href="../mvcboard/download.do?ofile=${row.ofile }&sfile=${row.sfile}">
+								[Down]
+								</a>							
+							</c:if> 
+						
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
@@ -79,7 +87,7 @@
 		<tr>
 			<td align="right">
 				
-				<button onclick="location.href='../mvcboard/write.do'"></button>
+				<button onclick="location.href='../mvcboard/write.do'">글쓰기</button>
 			</td>
 		</tr>
 	</table>
