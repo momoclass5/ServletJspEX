@@ -15,7 +15,7 @@ import org.apache.catalina.connector.Response;
 
 import com.oreilly.servlet.MultipartRequest;
 
-import common.FileUtil;
+import common.FileUtil_bk;
 import common.JSFunction;
 import dao.BoardDao;
 
@@ -33,7 +33,7 @@ public class WriteController extends HttpServlet{
 
 		String saveDirectory = "C:/upload";
 		// 파일 업로드 : 업로드 경로, 최대 사이즈를 지정
-		MultipartRequest mr = FileUtil.uploadFile(req, saveDirectory, 1024*1000);
+		MultipartRequest mr = FileUtil_bk.uploadFile(req, saveDirectory, 1024*1000);
 		
 		if(mr == null) {
 			// 파일 업로드 실패
@@ -49,7 +49,7 @@ public class WriteController extends HttpServlet{
         dto.setTitle(mr.getParameter("title"));
         dto.setContent(mr.getParameter("content"));
         dto.setPass(mr.getParameter("pass"));
-		
+		 
 	
         // 원본 파일명과 저장된 파일이름 설정
         
@@ -75,7 +75,7 @@ public class WriteController extends HttpServlet{
 	    	File newFile = new File(saveDirectory + File.separator + newFileName);
 	    	oldFile.renameTo(newFile);
 	    	
-	    	dto.setOfile(oFileName);	// 원본 파일명
+	    	dto.setOfile(fileName);	// 원본 파일명
 	    	dto.setSfile(newFileName);	// 저장된 파일명
 	    	
 	    }
